@@ -1,4 +1,5 @@
 class Have < Ownership
-   has_many :haves, class_name: 'Have'
-  has_many :have_items, through: :haves, class_name: 'Item', source: :item
- end
+  def self.ranking
+    self.group(:item_id).order('count_item_id DESC').limit(10).count(:item_id)
+  end
+end
